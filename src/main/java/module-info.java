@@ -10,7 +10,7 @@ module com.example.miniprojet_java {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
-
+    requires mysql.connector.java;
 
 
     opens com.example.miniprojet_java to javafx.fxml;

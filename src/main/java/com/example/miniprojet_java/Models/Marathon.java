@@ -1,70 +1,72 @@
 package com.example.miniprojet_java.Models;
 
-import java.util.Date;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 
 public class Marathon {
-    private Integer id = 0 ;
-    private String nom;
-    private Date date;
-    private String lieu_depart;
-    private String lieu_arrive;
-    private Integer Distance;
+    private SimpleIntegerProperty id;
+    private SimpleStringProperty nom;
+    private SimpleStringProperty lieu_depart;
+    private SimpleStringProperty lieu_arrive;
+    private SimpleIntegerProperty distance;
     private Courreur vainqueur = null;
 
 
-    public Marathon(String nom, Date date, String lieu_depart, String lieu_arrive, Integer distance) {
-        this.nom = nom;
-        this.date = date;
-        this.lieu_depart = lieu_depart;
-        this.lieu_arrive = lieu_arrive;
-        Distance = distance;
+    public Marathon(Integer id,String nom , String lieu_depart, String lieu_arrive, Integer distance) {
+        this.id = new SimpleIntegerProperty(id);
+        this.nom = new SimpleStringProperty(nom);
+        this.lieu_depart = new SimpleStringProperty(lieu_depart);
+        this.lieu_arrive = new SimpleStringProperty(lieu_arrive);
+        this.distance = new SimpleIntegerProperty(distance);
     }
 
     public Integer getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id.set(id);
     }
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
+
     public String getNom() {
+        return nom.get();
+    }
+    public void setNom(String nom) {
+        this.nom.set(nom);
+    }
+    public SimpleStringProperty nomProperty() {
         return nom;
     }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getLieuDep() {
+        return lieu_depart.get();
     }
-
-    public Date getDate() {
-        return date;
+    public void setLieuDep(String lieuDep) {
+        this.lieu_depart.set(lieuDep);
     }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getLieu_depart() {
+    public SimpleStringProperty lieuDepProperty() {
         return lieu_depart;
     }
-
-    public void setLieu_depart(String lieu_depart) {
-        this.lieu_depart = lieu_depart;
+    public String getLieuArv() {
+        return lieu_arrive.get();
     }
-
-    public String getLieu_arrive() {
+    public void setLieuArv(String lieuArv) {
+        this.lieu_arrive.set(lieuArv);
+    }
+    public SimpleStringProperty lieuArvProperty() {
         return lieu_arrive;
     }
-
-    public void setLieu_arrive(String lieu_arrive) {
-        this.lieu_arrive = lieu_arrive;
-    }
-
     public Integer getDistance() {
-        return Distance;
+        return distance.get();
     }
-
     public void setDistance(Integer distance) {
-        Distance = distance;
+        this.distance.set(distance);
+    }
+    public SimpleIntegerProperty distanceProperty() {
+        return distance;
     }
     public Courreur getVainqueur() {
         return vainqueur;

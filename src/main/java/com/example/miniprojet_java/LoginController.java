@@ -26,7 +26,7 @@ public class LoginController {
 
     private boolean verifierConnexion(String pseudo, String password) {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/marathon", "root", "")) {
-            String query = "SELECT COUNT(*) FROM utilisateurs WHERE pseudo = ? AND password = ?";
+            String query = "SELECT COUNT(*) FROM utilisateur WHERE pseudo = ? AND password = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, pseudo);
             stmt.setString(2, password);
@@ -37,7 +37,7 @@ public class LoginController {
 
             if (count > 0) {
                 // L'utilisateur est authentifié, récupérer le champ "role"
-                String roleQuery = "SELECT role FROM utilisateurs WHERE pseudo = ?";
+                String roleQuery = "SELECT role FROM utilisateur WHERE pseudo = ?";
                 PreparedStatement roleStmt = conn.prepareStatement(roleQuery);
                 roleStmt.setString(1, pseudo);
 
@@ -47,13 +47,13 @@ public class LoginController {
                 RoleUtilisateur.role = role;
 
                 // L'utilisateur est authentifié, récupérer le champ "Id"
-                String idQuery = "SELECT id_utilisateur FROM utilisateurs WHERE pseudo = ?";
+                String idQuery = "SELECT id FROM utilisateur WHERE pseudo = ?";
                 PreparedStatement idStmt = conn.prepareStatement(idQuery);
                 idStmt.setString(1, pseudo);
 
                 ResultSet idRs = idStmt.executeQuery();
                 idRs.next();
-                Integer id = idRs.getInt("id_utilisateur");
+                Integer id = idRs.getInt("id");
 
                 // Assigner le id à la variable statique RoleUtilisateur.id
                 RoleUtilisateur.id = id;
@@ -86,7 +86,7 @@ public class LoginController {
                 System.out.println(RoleUtilisateur.id);
                 System.out.println(RoleUtilisateur.role);
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard_admin.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboardAdmin.fxml"));
                 root = loader.load();
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
